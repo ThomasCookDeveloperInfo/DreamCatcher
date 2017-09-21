@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!-- Used by splash screen -->
+	<color name="pitchBlack">#000000</color>
+	<color name="skyBlue">#1333ff</color>
+	<color name="sunRise">#ffa940</color>
+
+	<!-- Primary app colors -->
+	<color name="colorPrimary">#3F51B5</color>
+	<color name="colorPrimaryDark">#303F9F</color>
+	<color name="colorAccent">#FF4081</color>
+
+	<!-- Used by startup activity -->
+	<color name="slateGrey">#ff515764</color>
+	<color name="slateGrey_Dark">#282e3a</color>
+	<color name="lightish_green">#44db5e</color>
+
+	<!-- Used by home activity -->
+	<color name="brightSkyBlue">#00B7F1</color>
+	<color name="battleship_grey">#62717a</color>
+</resources>
