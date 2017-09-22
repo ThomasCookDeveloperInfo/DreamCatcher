@@ -12,7 +12,7 @@ import org.junit.runner.RunWith
 import java.util.concurrent.TimeUnit
 
 /**
- * Instrumentation test for testing app environment
+ * Instrumentation splash_animated for testing app environment
  *
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
@@ -26,7 +26,7 @@ class EnvironmentInstrumentationTests {
     @Throws
     fun environmentInitialised() {
         //ARRANGE
-        // Context of the app under test.
+        // Context of the app under splash_animated.
         val appContext = InstrumentationRegistry.getTargetContext()
         Environment.initialise(appContext)
 

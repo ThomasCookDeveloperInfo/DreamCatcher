@@ -7,11 +7,8 @@ import net.grandcentrix.thirtyinch.TiView
  */
 interface StartupView : TiView {
 
-    //Show an error message
-    fun showError(message: String)
-
-    //Call to show a progress view.
-    fun showProgress(show: Boolean, message: String)
+    // Call to show splash animation when user taps screne
+    fun onScreenTapped()
 
     //Call to instruct the view to show the main one.
     fun navigateToHomeView()
@@ -19,4 +16,9 @@ interface StartupView : TiView {
 
 abstract class StartupPresenter : PresenterBase<StartupView>() {
 
+    // Called when user touches screen
+    abstract fun onTap()
+
+    // Called when splash animation has finished
+    abstract fun onAnimationFinished()
 }

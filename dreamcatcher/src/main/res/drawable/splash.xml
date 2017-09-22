@@ -6,10 +6,8 @@
 				android:color="@color/pitchBlack"/>
 		</shape>
 	</item>
-
 	<item>
-		<bitmap
-			android:gravity="center"
-			android:src="@drawable/splash_logo"/>
+		<bitmap android:src="@drawable/logo_animation"
+			android:gravity="center"/>
 	</item>
 </layer-list>

@@ -10,7 +10,7 @@ import org.robolectric.annotation.Config
 import java.io.File
 
 /**
- * Base class for test that use robolectric
+ * Base class for splash_animated that use robolectric
  */
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = intArrayOf(23),
