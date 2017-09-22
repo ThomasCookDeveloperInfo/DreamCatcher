@@ -6,14 +6,14 @@
 	<android.support.constraint.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:theme="@style/Theme.Startup">
+		tools:theme="@style/Theme.Home">
 
 		<com.wang.avi.AVLoadingIndicatorView
 			android:id="@+id/aviIndicator"
 			style="@style/AVLoadingIndicatorView"
 			android:layout_width="@dimen/progress_av_image_size"
 			android:layout_height="@dimen/progress_av_image_size"
-			app:indicatorColor="@color/slateGrey"
+			app:indicatorColor="@color/colorAccent"
 			app:indicatorName="BallPulseSyncIndicator"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintLeft_toLeftOf="parent"

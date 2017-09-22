@@ -11,4 +11,5 @@ interface DreamRepository {
     fun deleteDream(id: Int) : Observable<Boolean>
     fun addDream(dream: Model.Dream) : Observable<Model.Dream>
     fun getDream(id: Int) : Observable<Optional<Model.Dream>>
+    fun getDreams() : Observable<Collection<Model.Dream>>
 }

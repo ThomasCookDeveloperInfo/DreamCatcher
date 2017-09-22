@@ -11,26 +11,40 @@
 	<!-- Splash theme -->
 	<style name="AppTheme.Splash" parent="@style/Theme.AppCompat.NoActionBar">
 		<item name="android:background">@drawable/splash</item>
-		<item name="colorPrimaryDark">@android:color/transparent</item>
 	</style>
 
-	<!--Theme used by the startup activity-->
-	<style name="Theme.Startup" parent="@style/Theme.ApplicationBase">
-		<item name="android:windowBackground">@android:color/white</item>
-		<item name="colorPrimary">@color/skyBlue</item>
-		<item name="colorPrimaryDark">@color/pitchBlack</item>
-		<item name="colorControlNormal">@color/sunRise</item>
-	</style>
-
-	<!-- Application theme. -->
+	<!-- Home theme -->
 	<style name="Theme.Home" parent="@style/Theme.ApplicationBase">
 		<!-- Customize your theme here. -->
-		<item name="android:windowBackground">@android:color/white</item>
-		<item name="colorPrimary">@color/skyBlue</item>
-		<item name="colorPrimaryDark">@color/pitchBlack</item>
-		<item name="colorAccent">@color/sunRise</item>
-		<item name="colorControlNormal">@color/sunRise</item>
-		<item name="android:textColorPrimary">@color/slateGrey</item>
+		<item name="android:windowBackground">@color/colorPrimary</item>
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+	</style>
+
+	<!--Theme overlays for dark cells for primary button -->
+	<style name="ThemeOverlay.Cell.Dark.Button.Primary" parent="">
+		<item name="colorButtonNormal">@android:color/white</item>
+		<item name="colorControlHighlight">@color/colorPrimaryDark</item>
+	</style>
+
+	<!--Theme overlays for dark cells that have secondary button-->
+	<style name="ThemeOverlay.Cell.Dark.Button.Secondary" parent="">
+		<item name="colorButtonNormal">@color/colorPrimary</item>
+		<item name="colorControlHighlight">@color/colorPrimaryDark</item>
+	</style>
+
+	<!-- Theme overlay for dark recycler view dream cell -->
+	<style name="ThemeOverlay.Cell.Dark" parent="">
+		<item name="android:background">@color/colorPrimaryDark</item>
+		<item name="android:textColorPrimary">@color/colorAccent</item>
+		<item name="android:textColorSecondary">@color/colorAccent</item>
+		<item name="android:textColorTertiary">@android:color/white</item>
+	</style>
+
+	<!-- Theme overlay for dream dark cell -->
+	<style name="ThemeOverlay.Cell.Darker" parent="@style/ThemeOverlay.Cell.Dark">
+		<item name="android:background">@color/colorPrimaryDark</item>
 	</style>
 
 </resources>

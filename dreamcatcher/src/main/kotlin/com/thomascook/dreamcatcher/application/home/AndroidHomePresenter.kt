@@ -13,5 +13,6 @@ class AndroidHomePresenter(private val context: Context,
 
     override fun onAttachView(attachedView: HomeView) {
         super.onAttachView(attachedView)
+        view?.showDreams()
     }
 }

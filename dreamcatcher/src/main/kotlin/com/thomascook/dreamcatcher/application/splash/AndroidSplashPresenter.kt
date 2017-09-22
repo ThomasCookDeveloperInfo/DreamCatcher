@@ -1,18 +1,18 @@
-package com.thomascook.dreamcatcher.application.startup
+package com.thomascook.dreamcatcher.application.splash
 
 import android.content.Context
 import com.thomascook.dreamcatcher.application.InjectorProvider
-import com.thomascook.dreamcatcher.presenter.StartupPresenter
-import com.thomascook.dreamcatcher.presenter.StartupView
+import com.thomascook.dreamcatcher.presenter.SplashPresenter
+import com.thomascook.dreamcatcher.presenter.SplashView
 
 private const val TAG = "AndroidStartupPresenter"
 
-class AndroidStartupPresenter(private val context: Context,
-                              injectorProvider: InjectorProvider) : StartupPresenter() {
+class AndroidSplashPresenter(private val context: Context,
+                              injectorProvider: InjectorProvider) : SplashPresenter() {
 
     private var animating = false
 
-    override fun onAttachView(view: StartupView) {
+    override fun onAttachView(view: SplashView) {
         super.onAttachView(view)
     }
 
@@ -24,7 +24,6 @@ class AndroidStartupPresenter(private val context: Context,
     }
 
     override fun onAnimationFinished() {
-        animating = false
         view?.navigateToHomeView()
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		tools:context=".application.home.HomeActivity">
+
+	<data>
+		<variable
+			name="data"
+			type="com.thomascook.dreamcatcher.application.recyclerview.CellDream.ViewModel"/>
+
+		<variable
+			name="callback"
+			type="com.thomascook.dreamcatcher.application.recyclerview.CellDream.ViewHolderCallback"/>
+	</data>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/date"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+	</LinearLayout>
+</layout>

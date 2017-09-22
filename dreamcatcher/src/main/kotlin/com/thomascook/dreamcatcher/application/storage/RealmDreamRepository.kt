@@ -8,6 +8,7 @@ import com.thomascook.dreamcatcher.Model
 import com.thomascook.dreamcatcher.storage.DreamRepository
 import io.reactivex.Observable
 import io.realm.Realm
+import java.util.*
 import java.util.concurrent.Callable
 
 class RealmDreamRepository : DreamRepository {
@@ -88,4 +89,28 @@ class RealmDreamRepository : DreamRepository {
                 Optional.fromNullable(dream)
             }
         }.subscribeOn(AndroidRealmSchedulers.realmThread())
+
+    override fun getDreams(): Observable<Collection<Model.Dream>> =
+        Observable.fromCallable {
+            Realm.getDefaultInstance().use { realm ->
+                val dbDreams = realm.where(DBDream::class.java)
+                        .findAll()
+
+                if (dbDreams.isEmpty()) {
+                    Collections.emptyList<Model.Dream>()
+                }
+
+                val dreams = mutableListOf<Model.Dream>()
+                dbDreams.map { dream ->
+                    dreams.add(Model.Dream(
+                            dream.id,
+                            dream.time,
+                            dream.name,
+                            dream.content
+                    ))
+                }
+                realm.close()
+                dreams
+            }
+        }
 }

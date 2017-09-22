@@ -7,6 +7,8 @@ import net.grandcentrix.thirtyinch.TiView
  */
 interface HomeView : TiView {
 
+    // Called to show dreams
+    fun showDreams()
 }
 
 abstract class HomePresenter : PresenterBase<HomeView>() {

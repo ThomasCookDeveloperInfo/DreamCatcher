@@ -5,7 +5,7 @@ import net.grandcentrix.thirtyinch.TiView
 /**
  * Interface classes used to implement start up view/presenter
  */
-interface StartupView : TiView {
+interface SplashView : TiView {
 
     // Call to show splash animation when user taps screne
     fun onScreenTapped()
@@ -14,7 +14,7 @@ interface StartupView : TiView {
     fun navigateToHomeView()
 }
 
-abstract class StartupPresenter : PresenterBase<StartupView>() {
+abstract class SplashPresenter : PresenterBase<SplashView>() {
 
     // Called when user touches screen
     abstract fun onTap()

@@ -12,7 +12,7 @@
 		android:theme="@style/AppTheme.Splash">
 
 		<activity
-			android:name=".application.startup.StartupActivity"
+			android:name=".application.splash.SplashActivity"
 			android:launchMode="singleInstance"
 			android:screenOrientation="portrait"
 			android:windowSoftInputMode="adjustResize|stateHidden">

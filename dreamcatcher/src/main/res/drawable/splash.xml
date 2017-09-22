@@ -3,11 +3,7 @@
 	<item>
 		<shape android:shape="rectangle">
 			<solid
-				android:color="@color/pitchBlack"/>
+				android:color="@color/colorPrimary"/>
 		</shape>
-	</item>
-	<item>
-		<bitmap android:src="@drawable/logo_animation"
-			android:gravity="center"/>
 	</item>
 </layer-list>
