@@ -1,4 +1,5 @@
 <resources>
 	<string name="app_name">DreamCatcher</string>
 	<string name="no_dreams">You have no dreams</string>
+	<string name="all_dreams">List All</string>
 </resources>

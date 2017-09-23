@@ -82,7 +82,6 @@ object CellDream {
         override fun createViewHolder(recycleView: ViewGroup, callback: RecyclerViewBase.ViewHolderCallback?): RecyclerViewBase.ViewHolderBase {
             val context = android.view.ContextThemeWrapper(recycleView.context, R.style.ThemeOverlay_Cell_Dark)
             val viewBinding = CellDreamBinding.inflate(LayoutInflater.from(context), recycleView, false)
-
             return ViewHolder(viewBinding, callback as? Listener)
         }
     }

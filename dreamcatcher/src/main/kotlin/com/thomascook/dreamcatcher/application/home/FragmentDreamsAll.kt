@@ -55,6 +55,23 @@ class FragmentDreamsAll : TiFragmentBase<TiPresenterHolder, TiView>(), TiView {
 
     override fun provideView(): TiView = this
 
+    /**
+     * Interface that notifies of events that should be processed outside this class
+     */
+    interface Listener {
+        fun onFragmentBookingsAllRefresh()
+    }
+
+    override fun onDestroyView() {
+        viewDisposables.clear()
+        super.onDestroyView()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        ViewUtils.saveRecyclerViewPosition(outState, viewBinding?.recyclerView)
+    }
+
     @SuppressLint("MissingSuperCall")
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -62,6 +79,13 @@ class FragmentDreamsAll : TiFragmentBase<TiPresenterHolder, TiView>(), TiView {
         _viewBinding.recyclerView.layoutManager = LinearLayoutManager(context)
         _viewBinding.recyclerView.setHasFixedSize(true)
         //_viewBinding.recyclerView.addItemDecoration(VerticalItemDecoration(context))
+
+        //Set swipe refresh listener
+        _viewBinding.swipeRefresh.setOnRefreshListener {
+            val listener = activity
+            if (listener is Listener)
+                listener.onFragmentBookingsAllRefresh()
+        }
 
         val recyclerAdapter = RecyclerViewAdapter()
         _viewBinding.recyclerView.adapter = recyclerAdapter
@@ -90,7 +114,7 @@ class FragmentDreamsAll : TiFragmentBase<TiPresenterHolder, TiView>(), TiView {
             val newList = ArrayList<RecyclerViewBase.ViewModelBase>()
 
             dreams.forEach { dream ->
-                // Add dark header
+                // Add dark cell
                 newList.add(CellDream.ViewModel(dream))
             }
 
@@ -121,7 +145,7 @@ class FragmentDreamsAll : TiFragmentBase<TiPresenterHolder, TiView>(), TiView {
     }
 
     // Call to show/hide loading progress
-    fun showNoDreams(show: Boolean) {
+    private fun showNoDreams(show: Boolean) {
 
         val _viewBinding = viewBinding ?: return
 
@@ -142,24 +166,27 @@ class FragmentDreamsAll : TiFragmentBase<TiPresenterHolder, TiView>(), TiView {
                         _viewBinding.emptyText.visibility = View.VISIBLE
                     }
                 })
-            } else {
-                if (_viewBinding.imageLogo.visibility == View.VISIBLE) {
-                    animSet.playTogether(
-                            ObjectAnimator.ofFloat(_viewBinding.imageLogo, "alpha", 1.0f, 0.0f),
-                            ObjectAnimator.ofFloat(_viewBinding.emptyText, "alpha", 1.0f, 0.0f),
-                            ObjectAnimator.ofFloat(_viewBinding.recyclerView, "alpha", 0.0f, 1.0f))
-                    animSet.addListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            _viewBinding.imageLogo.visibility = View.GONE
-                            _viewBinding.emptyText.visibility = View.GONE
-                        }
+            }
+        } else {
+            if (_viewBinding.imageLogo.visibility == View.VISIBLE) {
+                animSet.playTogether(
+                        ObjectAnimator.ofFloat(_viewBinding.imageLogo, "alpha", 1.0f, 0.0f),
+                        ObjectAnimator.ofFloat(_viewBinding.emptyText, "alpha", 1.0f, 0.0f),
+                        ObjectAnimator.ofFloat(_viewBinding.recyclerView, "alpha", 0.0f, 1.0f))
+                animSet.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        _viewBinding.imageLogo.visibility = View.GONE
+                        _viewBinding.emptyText.visibility = View.GONE
+                    }
 
-                        override fun onAnimationStart(animation: Animator) {
-                            _viewBinding.swipeRefresh.visibility = View.VISIBLE
-                        }
-                    })
-                }
+                    override fun onAnimationStart(animation: Animator) {
+                        _viewBinding.swipeRefresh.visibility = View.VISIBLE
+                    }
+                })
             }
         }
+
+        animSet.duration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+        animSet.start()
     }
 }

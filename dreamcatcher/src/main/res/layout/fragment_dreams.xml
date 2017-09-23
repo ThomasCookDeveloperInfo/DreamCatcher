@@ -18,18 +18,29 @@
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintTop_toTopOf="parent">
 
-			<android.support.v7.widget.Toolbar
-				android:id="@+id/toolbar"
+			<android.support.design.widget.TabLayout
+				android:id="@+id/tabs"
+				style="@style/TextAppearance.Dreams.Tab"
 				android:layout_width="match_parent"
-				android:layout_height="?attr/actionBarSize"
-				tools:layout_height="52dp"
-				android:background="?attr/colorPrimary"
-				app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-
+				android:layout_height="40dp"
+				android:layout_marginEnd="32dp"
+				android:layout_marginStart="32dp"
+				app:tabIndicatorColor="@color/colorAccent"
+				app:tabSelectedTextColor="@color/colorAccent"
+				app:tabIndicatorHeight="2dp"
+				tools:layout_height="40dp"/>
 		</android.support.design.widget.AppBarLayout>
 
-		<!--<include layout="@layout/fragment_dreams_all"-->
-			<!--android:id="@+id/allDreams"/>-->
+
+		<android.support.v4.view.ViewPager
+			android:id="@+id/viewpager"
+			android:background="@color/colorPrimary"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/appbar"/>
 
 	</android.support.constraint.ConstraintLayout>
 </layout>

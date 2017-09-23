@@ -3,10 +3,13 @@ package com.thomascook.dreamcatcher.application.home
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
+import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.thomascook.core.utils.FragmentViewPagerAdapter
 import com.thomascook.dreamcatcher.Model
+import com.thomascook.dreamcatcher.R
 import com.thomascook.dreamcatcher.application.AndroidInjectionProvider
 import com.thomascook.dreamcatcher.databinding.FragmentDreamsBinding
 import com.thomascook.dreamcatcher.presenter.DreamsPresenter
@@ -36,15 +39,33 @@ class FragmentDreams : TiFragment<DreamsPresenter, DreamsView>(), DreamsView {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val _viewBinding = FragmentDreamsBinding.inflate(inflater ?: LayoutInflater.from(context))
-        _viewBinding.toolbar.title ="Dreams"
 
-        // Inflate the all dreams fragment
-        val fragment = FragmentDreamsAll()
-        childFragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                .add(fragment, FRAGMENT_DREAMS_ALL)
-                .setBreadCrumbTitle("Dreams")
-                .commit()
+        // Setup adapter and add FragmentDreamsAll
+        val adapter = FragmentViewPagerAdapter(childFragmentManager)
+        adapter.addFragment(FragmentDreamsAll::class.java, null, getString(R.string.all_dreams))
+
+        // Set view pager adapter
+        _viewBinding.viewpager.adapter = adapter
+
+        // Setup tabs with view pager
+        _viewBinding.tabs.setupWithViewPager(_viewBinding.viewpager)
+
+        _viewBinding.viewpager.addOnPageChangeListener(object: ViewPager.SimpleOnPageChangeListener() {
+            internal var selectedPaage = -1
+
+            override fun onPageSelected(position: Int) {
+                selectedPaage = position
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                if (state != ViewPager.SCROLL_STATE_IDLE && selectedPaage != -1)
+                    return
+
+                when (selectedPaage) {
+                    0 -> handler.post { presenter.onListViewShown() }
+                }
+            }
+        })
 
         viewBinding = _viewBinding
 
@@ -53,7 +74,9 @@ class FragmentDreams : TiFragment<DreamsPresenter, DreamsView>(), DreamsView {
 
     override fun showDreams(dreams: Collection<Model.Dream>) {
         handler.post {
-            val fragment = childFragmentManager.findFragmentByTag(FRAGMENT_DREAMS_ALL)
+            val fragment = (viewBinding?.viewpager?.adapter
+                    as FragmentViewPagerAdapter?)?.currentPrimaryItem
+
             when (fragment) {
                 is FragmentDreamsAll -> {
                     fragment.showDreams(dreams)

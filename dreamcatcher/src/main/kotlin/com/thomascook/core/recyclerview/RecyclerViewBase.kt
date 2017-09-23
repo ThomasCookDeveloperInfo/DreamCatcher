@@ -38,17 +38,17 @@ object RecyclerViewBase {
     /**
      * Abstract class for implementing Recycle view holder creators.
      */
-    interface ViewHolderBaseCreator<out VH : ViewHolderBase> {
-        fun createViewHolder(recycleView: ViewGroup, callback: ViewHolderCallback?): VH
+    interface ViewHolderBaseCreator<out viewHolder : ViewHolderBase> {
+        fun createViewHolder(recycleView: ViewGroup, callback: ViewHolderCallback?): viewHolder
     }
 
     /**
-     * @param <VH> View holder class that extends [ViewHolderBase] base class
+     * @param <viewHolder> View holder class that extends [ViewHolderBase] base class
      * [RecyclerView] adapter used to manager our custom view holders
     </VH> */
-    abstract class ViewAdapter<VH : ViewHolderBase>(
-            private val viewHolderCreator: SparseArray<ViewHolderBaseCreator<VH>>,
-            private val dataList: MutableList<ViewModelBase>) : RecyclerView.Adapter<VH>() {
+    abstract class ViewAdapter<viewHolder : ViewHolderBase>(
+            private val viewHolderCreator: SparseArray<ViewHolderBaseCreator<viewHolder>>,
+            private val dataList: MutableList<ViewModelBase>) : RecyclerView.Adapter<viewHolder>() {
 
         private var viewHolderCallback: ViewHolderCallback? = null
 
@@ -69,13 +69,13 @@ object RecyclerViewBase {
             return this.dataList.size
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH? {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): viewHolder? {
             //Possibly add click listeners
             val creator = viewHolderCreator.get(viewType)
             return creator?.createViewHolder(parent, this.viewHolderCallback)
         }
 
-        override fun onBindViewHolder(holder: VH, position: Int) {
+        override fun onBindViewHolder(holder: viewHolder, position: Int) {
             val viewData = getData(position)
             if (viewData != null) {
                 holder.bindAdapterData(viewData)

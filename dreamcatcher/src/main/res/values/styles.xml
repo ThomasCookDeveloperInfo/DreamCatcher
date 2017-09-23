@@ -34,9 +34,19 @@
 		<item name="colorControlHighlight">@color/colorPrimaryDark</item>
 	</style>
 
+	<style name="TextAppearance.Dreams.Tab" parent="Widget.Design.TabLayout">
+		<item name="tabTextAppearance">@style/TextAppearance.Bookings.Tab.Unselected</item>
+		<item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+	</style>
+
+	<style name="TextAppearance.Bookings.Tab.Unselected" parent="TextAppearance.AppCompat.Button">
+		<item name="android:textSize">14sp</item>
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+
 	<!-- Theme overlay for dark recycler view dream cell -->
 	<style name="ThemeOverlay.Cell.Dark" parent="">
-		<item name="android:background">@color/colorPrimaryDark</item>
+		<item name="android:background">@color/colorPrimary</item>
 		<item name="android:textColorPrimary">@color/colorAccent</item>
 		<item name="android:textColorSecondary">@color/colorAccent</item>
 		<item name="android:textColorTertiary">@android:color/white</item>
